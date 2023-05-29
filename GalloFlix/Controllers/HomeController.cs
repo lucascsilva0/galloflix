@@ -4,28 +4,39 @@ using GalloFlix.Models;
 
 namespace GalloFlix.Controllers;
 
-public class HomeController : Controller
-{
+public class HomeController : Controller{
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
-    {
+    public HomeController(ILogger<HomeController> logger){
         _logger = logger;
     }
 
-    public IActionResult Index()
-    {
-        return View();
+    public IActionResult Index(){
+        List<Genre> genres = new(){
+            new Genre(){
+                Id   = 1,
+                Name = "Ação"
+            },
+            new Genre(){
+                Id   = 2,
+                Name = "Terror"
+            }
+        }; // objeto genres é uma lista de gêneros
+        genres.Add(
+            new(){
+                Id   = 3,
+                Name = "Drama"
+            }
+        );
+        return View(genres);
     }
 
-    public IActionResult Privacy()
-    {
+    public IActionResult Privacy(){
         return View();
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
+    public IActionResult Error(){
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
